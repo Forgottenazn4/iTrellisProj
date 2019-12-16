@@ -16,13 +16,19 @@ using System.Windows.Shapes;
 namespace iTrellisProj
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ExpensePage.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class ExpensePage : Page
     {
-        public MainWindow()
+        public ExpensePage()
         {
             InitializeComponent();
+        }
+        // Custom constructor to pass expense report data
+        public ExpensePage(object data) : this()
+        {
+            // Bind to expense report data.
+            this.DataContext = data;
         }
     }
 }

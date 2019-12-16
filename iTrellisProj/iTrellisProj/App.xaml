@@ -4,6 +4,52 @@
              xmlns:local="clr-namespace:iTrellisProj"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="headerTextStyle">
+            <Setter Property="Label.VerticalAlignment" Value="Center"/>
+            <Setter Property="Label.FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="Label.FontWeight" Value="Bold"/>
+            <Setter Property="Label.FontSize" Value="30"/>
+            <Setter Property="Label.Foreground" Value="Black"/>
+            <Setter Property="Label.Background" Value="LightGray" />
+        </Style>
+
+        <Style x:Key="listHeaderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="White" />
+        </Style>
+
+        <Style x:Key="listHeaderTextStyle" TargetType="{x:Type Label}">
+            <Setter Property="Label.FontWeight" Value="Bold"/>
+            <Setter Property="Label.FontSize" Value="26"/>
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style x:Key="columnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Background" Value="#4E87D4" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        
+        <Style x:Key="labelStyle" TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="0,0,0,0" />
+        </Style>
+
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="155" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Margin" Value="0,0,20,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="listBoxStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="Margin" Value="0, 20, 20, 0" />
+        </Style>
     </Application.Resources>
 </Application>
