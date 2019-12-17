@@ -20,6 +20,7 @@ namespace iTrellisProj
     /// </summary>
     public partial class ExpensePage : Page
     {
+        private Person person_;
         public ExpensePage()
         {
             InitializeComponent();
@@ -28,7 +29,14 @@ namespace iTrellisProj
         public ExpensePage(object data) : this()
         {
             // Bind to expense report data.
-            this.DataContext = data;
+            person_ = (Person) data;
+            ExpensesListBox.ItemsSource = person_.Expenses;
+            this.DataContext = this;
         }
+        //private void SaveHandler (object sender, RoutedEventArgs e)
+        //{
+        //    ExpensePage expenseReportPage = new ExpensePage(this.peopleListBox.SelectedItem);
+        //    this.NavigationService.Navigate(expenseReportPage);
+        //}
     }
 }

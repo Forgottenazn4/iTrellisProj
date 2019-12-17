@@ -30,14 +30,14 @@
         <Grid Grid.Column="1" Grid.Row="1">
             <!--Templates to display expense report data-->
             <Grid.Resources>
-                <!-- Name item template -->
+                <!-- Name item template --><!--
                 <DataTemplate x:Key="expenseNameItemTemplate">
                     <Label Content="{Binding XPath=@ExpenseName}"/>
                 </DataTemplate>
-                <!-- Amount item template -->
-                <DataTemplate x:Key="amountItemTemplate">
-                    <Label Content="{Binding XPath=@ExpenseAmount}"/>
-                </DataTemplate>
+                --> <!--Amount item template--> 
+                <!--<DataTemplate x:Key="amountItemTemplate">
+                    <Label Content="{Binding XPath=@Value}"/>
+                </DataTemplate>-->
             </Grid.Resources>
 
             <Grid.ColumnDefinitions>
@@ -51,20 +51,34 @@
             </Grid.RowDefinitions>
 
             <!-- Name -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <!--<StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Label Style="{StaticResource labelStyle}">Name:</Label>
                 <Label Style="{StaticResource labelStyle }" Content="{Binding XPath=@Name}"></Label>
-            </StackPanel>
+            </StackPanel>-->
 
             <!-- Expense Name and Amount table -->
-            <Grid Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <DataGrid ItemsSource="{Binding XPath=Expense}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" AutoGenerateColumns="False" RowHeaderWidth="0" >
+            <!--<Grid Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <DataGrid ItemsSource="{Binding XPath=people_.expenses}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" AutoGenerateColumns="False" RowHeaderWidth="0" >
                     <DataGrid.Columns>
-                        <!--<DataGridTemplateColumn Header="ExpenseName" CellTemplate="{StaticResource expenseNameItemTemplate}" />-->
+                        --><!--<DataGridTemplateColumn Header="ExpenseName" CellTemplate="{StaticResource expenseNameItemTemplate}" />--><!--
                         <DataGridTemplateColumn Header="Amount" CellTemplate="{StaticResource amountItemTemplate}" />
                     </DataGrid.Columns>
                 </DataGrid>
-            </Grid>
+            </Grid>-->
+            <ListBox x:Name="ExpensesListBox" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Value}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
         </Grid>
     </Grid>
 </Page>

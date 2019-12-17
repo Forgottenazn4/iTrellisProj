@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace iTrellisProj
 {
-    public class Person
+    public class Person : ViewModelBase
     {
-        string name_ = "not here";
+        string name_ = "";
         List<Expense> expenses_ = new List<Expense>
         {
-            new Expense(100)
+            new Expense(0)
         };
-        double totalExpenses_ = 0;
 
+        double totalExpenses_ = 0;
         public string Name
         {
             get { return name_; }
-            set { name_ = value; }
+            set { 
+                name_ = value;
+                OnPropertyChanged("Name");
+            }
         }
 
         public List<Expense> Expenses
@@ -33,6 +37,9 @@ namespace iTrellisProj
                 {
                     totalExpenses_ += i.Value;
                 }
+
+                OnPropertyChanged("Expenses");
+                OnPropertyChanged("TotalExpenses");
             }
         }
 

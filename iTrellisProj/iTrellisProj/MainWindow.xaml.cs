@@ -23,6 +23,7 @@ namespace iTrellisProj
         public MainWindow()
         {
             InitializeComponent();
+            var peopleViewModel = new PeopleViewModel();
         }
     }
 }

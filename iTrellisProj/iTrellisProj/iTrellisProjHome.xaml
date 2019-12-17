@@ -64,16 +64,22 @@
 
         <!--ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}"-->
         <!--ItemTemplate="{StaticResource nameItemTemplate}"-->
-        <ListBox Name="peopleListBox" Grid.Column="1" Grid.Row="2" Style="{StaticResource listBoxStyle}">
+        <ListBox Name="peopleListBox" Grid.Column="1" Grid.Row="2" Style="{StaticResource listBoxStyle}" IsSynchronizedWithCurrentItem="True">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Style="{StaticResource labelStyle}" Content="{Binding Name}">
+                    <!--<TextBlock Text="{Binding Name}">
 
-                    </Label>
+                    </TextBlock>-->
+                    <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}">
+                        <!--<TextBox.Text>
+                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
+                                     BindsDirectlyToSource="True" NotifyOnTargetUpdated="True" />
+                        </TextBox.Text>-->
+                    </TextBox>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <!-- View report button -->
-        <Button Grid.Column="1" Grid.Row="3" Click="Button_Click" Style="{StaticResource buttonStyle}">View</Button>
+        <Button Grid.Column="1" Grid.Row="3" Click="Button_Click" Style="{StaticResource buttonStyle}">View Report</Button>
     </Grid>
 </Page>

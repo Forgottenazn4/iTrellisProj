@@ -20,24 +20,30 @@ namespace iTrellisProj
     /// </summary>
     public partial class iTrellisProjHome : Page
     {
-        List<Person> people_ = new List<Person>
-        {
-            new Person() { Name = "Bob"},
-            new Person() { Name = "Jim"},
-            new Person()
-        };
+        static List<Person> people_;
         public iTrellisProjHome()
         {
             InitializeComponent();
 
             peopleListBox.ItemsSource = people_;
+            DataContext = this;
+        }
+        public iTrellisProjHome(object data) : this()
+        {
+            InitializeComponent();
+
+            peopleListBox.ItemsSource = (List<Person>) data;
+            DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // View Expense Report
-            ExpensePage expenseReportPage = new ExpensePage(this.peopleListBox.SelectedItem);
-            this.NavigationService.Navigate(expenseReportPage);
+            if (this.peopleListBox.SelectedItem != null)
+            {
+                ExpensePage expenseReportPage = new ExpensePage(this.peopleListBox.SelectedItem);
+                this.NavigationService.Navigate(expenseReportPage);
+            }
 
         }
     }
