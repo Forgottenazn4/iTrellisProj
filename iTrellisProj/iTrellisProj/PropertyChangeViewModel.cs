@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace iTrellisProj
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
-    {// Handles String Properties Updating
+    public class PropertyChangeViewModel : INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
+        // Called by the Set accessor of each property.
+        public void OnPropertyChanged(String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

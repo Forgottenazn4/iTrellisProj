@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:iTrellisProj"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="500"
       Title="iTrellisProj - Home">
 
     <Grid>
@@ -23,63 +23,53 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.Resources>
 
-            <DataTemplate x:Key="nameItemTemplate">
-                <Label Content="{Binding XPath=@Name}"/>
-            </DataTemplate>
-            <!-- Expenses Data -->
-            <XmlDataProvider x:Key="ExpenseDataSource" XPath="Expenses">
-                <x:XData>
-                    <Expenses xmlns="">
-                        <!--<Person Name="Mike" >
-                            <Expense ExpenseName="Lunch" ExpenseAmount="50" />
-                            <Expense ExpenseName="Transportation" ExpenseAmount="50" />
-                        </Person>
-                        <Person Name="Lisa">
-                            <Expense ExpenseName="Document printing" ExpenseAmount="50"/>
-                            <Expense ExpenseName="Gift" ExpenseAmount="125" />
-                        </Person>
-                        <Person Name="John">
-                            <Expense ExpenseName="Magazine subscription" ExpenseAmount="50"/>
-                            <Expense ExpenseName="New machine" ExpenseAmount="600" />
-                            <Expense ExpenseName="Software" ExpenseAmount="500" />
-                        </Person>
-                        <Person Name="Mary">
-                            <Expense ExpenseName="Dinner" ExpenseAmount="100" />
-                        </Person>-->
-                    </Expenses>
-                </x:XData>
-            </XmlDataProvider>
-        </Grid.Resources>
-        
-        <Label Grid.Column="1" Grid.Row="0" Style="{StaticResource headerTextStyle}" >
-            View Expense Report
+        <Label Grid.Column="1" Style="{StaticResource headerTextStyle}" >
+            Split Expenses
         </Label>
 
-        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource listHeaderStyle}">
-            <Label Style="{StaticResource listHeaderTextStyle}">People</Label>
-        </Border>
+        <StackPanel Orientation="Vertical"  Grid.Column="1" Grid.Row="1" >
+            <Label Style="{StaticResource listHeaderTextStyle}">
+                People
+            </Label>
+            <ListBox x:Name="peopleListBox" Style="{StaticResource listBoxStyle}" IsSynchronizedWithCurrentItem="True" SelectionChanged="Person_Click">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            <Label Content=", Total Expenses: $"/>
+                            <Label Content="{Binding Path=TotalExpenses, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <Label Content=", Total Owed: $"/>
+                            <Label Content="{Binding Path=TotalOwed, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
 
-        <!--ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}"-->
-        <!--ItemTemplate="{StaticResource nameItemTemplate}"-->
-        <ListBox Name="peopleListBox" Grid.Column="1" Grid.Row="2" Style="{StaticResource listBoxStyle}" IsSynchronizedWithCurrentItem="True">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <!--<TextBlock Text="{Binding Name}">
+        <!-- Personal Expenses Section-->
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2" >
+            <StackPanel Orientation="Horizontal">
+                <Label Name="SelectedNameLabel" Style="{StaticResource listHeaderTextStyle}"/>
+                <Label Content="'s Expenses" Style="{StaticResource listHeaderTextStyle}"/>
+            </StackPanel>
 
-                    </TextBlock>-->
-                    <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}">
-                        <!--<TextBox.Text>
-                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" 
-                                     BindsDirectlyToSource="True" NotifyOnTargetUpdated="True" />
-                        </TextBox.Text>-->
-                    </TextBox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <!-- View report button -->
-        <Button Grid.Column="1" Grid.Row="3" Click="Button_Click" Style="{StaticResource buttonStyle}">View Report</Button>
+            <ListBox x:Name="ExpensesListBox" Style="{StaticResource listBoxStyle}" IsSynchronizedWithCurrentItem="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="$"/>
+                            <TextBox Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <!-- Expenses Update buttons -->
+        <Button Grid.Column="1" Grid.Row="3" Click="UpdateExpense_Click" Style="{StaticResource buttonStyle}" HorizontalAlignment="Left">Update Expense</Button>
+        <Button Grid.Column="1" Grid.Row="3" Click="AddExpense_Click" Style="{StaticResource buttonStyle}" HorizontalAlignment="Right">Add Expense</Button>
+        <Label Name="PrescribedSolutionLabel" Grid.Column="1" Grid.Row="4" Style="{StaticResource listHeaderTextStyle}"/>
     </Grid>
 </Page>

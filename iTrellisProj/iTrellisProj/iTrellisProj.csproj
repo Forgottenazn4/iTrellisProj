@@ -55,11 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModelBase.cs" />
-    <Page Include="ExpensePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="PropertyChangeViewModel.cs" />
     <Page Include="iTrellisProjHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,9 +69,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Expense.cs" />
-    <Compile Include="ExpensePage.xaml.cs">
-      <DependentUpon>ExpensePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="iTrellisProjHome.xaml.cs">
       <DependentUpon>iTrellisProjHome.xaml</DependentUpon>
     </Compile>
@@ -85,7 +78,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PeopleViewModel.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -13,8 +13,7 @@ namespace iTrellisTest
         public void testSettingAValue()
         {
             const string expectedString = "Hello World";
-            Person p = new Person();
-            p.Name = "Hello World";
+            Person p = new Person("Hello World");
 
             Assert.AreEqual(p.Name, expectedString);
         }
@@ -22,7 +21,7 @@ namespace iTrellisTest
         [TestMethod]
         public void testTotalExpensesValue()
         {
-            Person p = new Person();
+            Person p = new Person("J");
             List<Expense> expenses = new List<Expense>()
             {
                 new Expense(100),

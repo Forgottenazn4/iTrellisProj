@@ -23,7 +23,8 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Margin" Value="0, 20, 0, 0" />
         </Style>
 
         <Style x:Key="columnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
@@ -45,11 +46,10 @@
             <Setter Property="Width" Value="155" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Margin" Value="0,0,20,0" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
 
         <Style x:Key="listBoxStyle" TargetType="{x:Type ListBox}">
-            <Setter Property="Margin" Value="0, 20, 20, 0" />
+            <Setter Property="Margin" Value="0, 0, 20, 0" />
         </Style>
     </Application.Resources>
 </Application>

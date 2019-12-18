@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace iTrellisProj
 {
-    public class Expense
+    public class Expense : PropertyChangeViewModel
     {
         double value_;
+
         public Expense(double expense)
         {
             value_ = expense;
@@ -17,7 +19,11 @@ namespace iTrellisProj
         public double Value
         {
             get { return value_; }
-            set { value_ = value; }
+            set
+            {
+                value_ = Math.Round(value, 2);
+                OnPropertyChanged("Value");
+            }
         }
     }
 }
