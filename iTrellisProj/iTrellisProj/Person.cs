@@ -21,6 +21,19 @@ namespace iTrellisProj
         {
             Name = name;
         }
+
+        public Person(string name, List<double> expenses)
+        {
+            Name = name;
+            expenses_ = new List<Expense>();
+            totalExpenses_ = 0;
+            foreach (double expense in expenses)
+            {
+                expenses_.Add(new Expense(expense));
+            }
+
+            CalculateTotalExpenses();
+        }
         public string Name
         {
             get { return name_; }
@@ -38,6 +51,7 @@ namespace iTrellisProj
             {
                 expenses_ = value;
                 OnPropertyChanged("Expenses");
+                CalculateTotalExpenses();
             }
         }
         public double CalculateTotalExpenses()

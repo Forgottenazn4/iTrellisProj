@@ -28,6 +28,8 @@ namespace iTrellisProj
             new Person("")
         };
 
+        ExpenseCalculator calculator_ = new ExpenseCalculator();
+
         public iTrellisProjHome()
         {
             InitializeComponent();
@@ -56,15 +58,8 @@ namespace iTrellisProj
                 // Add a new expense to the selected Person's Expense List
                 ((Person)this.peopleListBox.SelectedItem).Expenses.Add(new Expense(0));
 
-                // Re-Bind the Item Source to the Selected Person's Expenses
-                ExpensesListBox.ItemsSource = ((Person)this.peopleListBox.SelectedItem).Expenses;
-
-                // Recalculate Total expenses
-                ((Person)this.peopleListBox.SelectedItem).CalculateTotalExpenses();
-
-                // Recalculate all Debts
-                CalculateAllDebts();
-                PrescribePayments();
+                // Update the expenses to get a current total, not a necessity
+                UpdateExpense_Click(sender, e);
             }
 
         }
@@ -80,94 +75,13 @@ namespace iTrellisProj
                 ((Person)this.peopleListBox.SelectedItem).CalculateTotalExpenses();
 
                 // Recalculate all Debts
-                CalculateAllDebts();
-                PrescribePayments();
+                calculator_.CalculateAllDebts(people_);
+                
+                // Prescribe payments to the user
+                PrescribedSolutionLabel.Content = calculator_.PrescribePayments(people_);
             }
-
         }
 
-        private void CalculateAllDebts()
-        {
-            double TotalDebt = 0;
-            double TotalPeople = 0;
-            foreach (Person p in people_)
-            {
-                if (p.Name.Length != 0)
-                {
-                    TotalDebt += p.TotalExpenses;
-                    ++TotalPeople;
-                }
-            }
-            foreach (Person p in people_)
-            {
-                if (p.Name.Length > 0)
-                {
-                    p.TotalOwed = p.TotalExpenses - (TotalDebt / TotalPeople);
-                }
-                else
-                {
-                    p.TotalOwed = 0;
-                }
-            }
-
-        }
-
-        private void PrescribePayments()
-        {
-            // Clone people_ for calculating the prescribed payments
-            var clonedList = people_.Select(p => (Person)p.Clone()).ToList();
-            ObservableCollection<Person> temp = new ObservableCollection<Person>(clonedList);
-
-            List<Person> PeopleToAccountFor = new List<Person>();
-            string MessageToUser = "";
-            foreach (Person p in temp)
-            {
-                if (p.Name.Length > 0 && p.TotalOwed != 0)
-                {
-                    if (PeopleToAccountFor.Count == 0)
-                    {
-                        PeopleToAccountFor.Add(p);
-                    }
-                    else if (PeopleToAccountFor.Count > 0)
-                    {
-                        double DebtToPay = 0;
-                        foreach (Person PersonToSettle in PeopleToAccountFor)
-                        {
-                            if (p.TotalOwed < 0 && PersonToSettle.TotalOwed > 0)
-                            {
-                                DebtToPay = Math.Min(Math.Abs(p.TotalOwed), Math.Abs(PersonToSettle.TotalOwed));
-                                if (DebtToPay > 0)
-                                {
-                                    MessageToUser += String.Format("{0} owes {1} ${2}\n", p.Name, PersonToSettle.Name, DebtToPay);
-
-                                    p.TotalOwed += DebtToPay;
-                                    PersonToSettle.TotalOwed -= DebtToPay;
-                                }
-                            }
-                            else if (p.TotalOwed > 0 && PersonToSettle.TotalOwed < 0)
-                            {
-                                DebtToPay = Math.Min(Math.Abs(p.TotalOwed), Math.Abs(PersonToSettle.TotalOwed));
-                                if (DebtToPay > 0)
-                                {
-                                    MessageToUser += String.Format("{0} owes {1} ${2}\n", PersonToSettle.Name, p.Name, DebtToPay);
-
-                                    p.TotalOwed -= DebtToPay;
-                                    PersonToSettle.TotalOwed += DebtToPay;
-                                }
-                            }
-                        }
-                        // If they're not done settling
-                        // then add them to the list to settle debts with
-                        if (p.TotalOwed != 0)
-                        {
-                            PeopleToAccountFor.Add(p);
-                        }
-                    }
-                }
-            }
-
-            PrescribedSolutionLabel.Content = MessageToUser;
-        }
 
     }
 }

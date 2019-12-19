@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExpenseCalculator.cs" />
     <Compile Include="PropertyChangeViewModel.cs" />
     <Page Include="iTrellisProjHome.xaml">
       <SubType>Designer</SubType>

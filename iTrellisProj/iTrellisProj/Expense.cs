@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace iTrellisProj
 {
-    public class Expense : PropertyChangeViewModel
+    public class Expense
     {
         double value_;
 
@@ -22,7 +22,6 @@ namespace iTrellisProj
             set
             {
                 value_ = Math.Round(value, 2);
-                OnPropertyChanged("Value");
             }
         }
     }
