@@ -1,0 +1,1 @@
+start iTrellisProj\iTrellisProj\bin\Debug\iTrellisProj
